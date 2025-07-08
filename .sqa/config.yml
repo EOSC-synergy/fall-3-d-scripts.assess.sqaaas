@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts:
+      branch: master
+      repo: https://gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts git:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-purple-beagle.sh
+        container: qc.acc_lanky-goldenrod-barracuda
+  QC.Doc:
+    repos:
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-wheat-saola.sh
+        container: qc.doc_slimy-heliotrope-neanderthal
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-taupe-moose.sh
+        container: qc.doc_bumpy-platinum-woodpecker
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-corn-husky.sh
+        container: qc.doc_blurry-copper-mayfly
+  QC.Lic:
+    repos:
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-gamboge-peccary.sh
+        container: qc.lic_shaggy-firebrick-chinchilla
+  QC.Sec:
+    repos:
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-sangria-wildebeest.sh
+        container: qc.sec_breezy-dandelion-snake
+  QC.Sty:
+    repos:
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-ochre-emu.sh
+        container: qc.sty_freaky-burgundy-clam
+  QC.Uni:
+    repos:
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-ochre-shark.sh
+        container: qc.uni_boozy-viridian-dragon
+  QC.Ver:
+    repos:
+      gitlab.geo3bcn.csic.es/hpascual/fall-3-d-scripts get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-lime-axolotl.sh
+        container: qc.ver_hazy-auburn-cat
+timeout: 5400
